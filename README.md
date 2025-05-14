@@ -57,3 +57,15 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+
+Creating vehicle renting app
+
+1. ng new "vehicleRentingApp"
+2. nav bar with login/register buttons, required cards 
+3. login form & signup form (model UI)
+4. @ViewChild for opening & closing login/register models.
+5. import formsModule for using [(ngModel)] -> for two way data binding for forms and input -> store values in an object for api callings
+6. API's for login & register.
+7. Model constructor classes for API data (to store data in objects for post methods)
+8. storing values in localstorage for using user data (to check whether user is loggedin or not)

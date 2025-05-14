@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-  <a class="navbar-brand text-danger fw-bold" routerLink="/">
+  <a class="navbar-brand text-danger fw-bold" href="">
     <i class="fa fa-car"></i> CarRent
   </a>
   <div class="collapse navbar-collapse">
@@ -8,8 +8,80 @@
       <li class="nav-item"><a class="nav-link" href="#">Search Cars</a></li>
       <li class="nav-item"><a class="nav-link" href="#">Host Your Car</a></li>
     </ul>
-    <button class="btn btn-outline-light">Login / Register</button>
+    <!-- Trigger Modal -->
+     @if(userLoggedData == undefined){
+      <button (click)="openLoginModal()" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">
+        Login / Register
+      </button>
+     }@else {
+      <div id="userInfo">
+        <span class="span" id="username">{{userLoggedData.emailId}}</span>
+        <button (click)="onLogout()" class="btn btn-outline-light" id="logoutBtn">Logout</button>
+      </div>
+     }
   </div>
 </nav>
 
 <router-outlet />
+
+<!-- Login Modal -->
+<div class="modal" #loginModal id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="loginModalLabel">Login or Register</h1>
+        <button (click)="closeLoginModal()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="emailInput" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="emailInput" placeholder="Enter email">
+          </div>
+          <div class="mb-3">
+            <label for="passwordInput" class="form-label">Password</label>
+            <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+          </div>
+          <button (click)="onLogin()" type="submit" class="btn btn-primary w-100 mb-2">Login</button>
+          <p>Don't have an account? <span class="registerSpan" (click)="openRegisterModal()" data-bs-toggle="modal" data-bs-target="#registerModal">Register</span></p>
+          <!-- <button data-bs-toggle="modal" data-bs-target="#registerModal" type="button" class="btn btn-secondary w-100">Register</button> -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Register Modal -->
+<div class="modal" #registerModal id="registerModal" tabindex="-2" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="loginModalLabel">Register</h1>
+        <button (click)="closeRegisterModal()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="fullname"  class="form-label">Full Name</label>
+            <input type="text" name="name" [(ngModel)]="registerUser.name" class="form-control" id="fullname" placeholder="Enter Full Name">
+          </div>
+          <div class="mb-3">
+            <label for="mobile" class="form-label">Mobile Number</label>
+            <input type="text" name="mobileNo" [(ngModel)]="registerUser.mobileNo" class="form-control" id="mobile" placeholder="Enter Full Name">
+          </div>
+          <div class="mb-3">
+            <label for="emailInput" class="form-label">Email address</label>
+            <input type="email" name="emailId" [(ngModel)]="registerUser.emailId" class="form-control" id="emailInput" placeholder="Enter email">
+          </div>
+          <div class="mb-3">
+            <label for="passwordInput" class="form-label">Password</label>
+            <input type="password" name="password" [(ngModel)]="registerUser.password" class="form-control" id="passwordInput" placeholder="Password">
+          </div>
+          <button (click)="onRegister()" type="button" class="btn btn-primary w-100 mb-2">Register</button>
+          <p>Already have an account? <span class="registerSpan" data-bs-toggle="modal" data-bs-target="#loginModal">Login</span></p>
+          <!-- <button type="button" class="btn btn-secondary w-100">Register</button> -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
